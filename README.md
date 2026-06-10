@@ -10,7 +10,11 @@ Basado en [ohana-growth](https://github.com/marcial-moreno/ohana-growth) y [ohan
 - **Impacto**: qué ha construido y qué resultados concretos ha logrado (preguntas 5–6)
 - **Multiplicación**: si comparte lo aprendido con el equipo (pregunta 7)
 - **Barreras y sentimiento**: contexto cualitativo para el programa (preguntas 8–9)
-- **Quién responde**: nombre y correo Nubank (el diagnóstico no es anónimo)
+- **Quién responde**: correo Nubank (el diagnóstico no es anónimo)
+
+El usuario no ve su resultado: al final recibe un mensaje de agradecimiento del
+equipo Ohana. El score, los hábitos y el track calculado van directo al sheet
+para que el equipo arme el plan de acompañamiento.
 
 El resultado asigna uno de tres tracks:
 
@@ -22,12 +26,12 @@ El resultado asigna uno de tres tracks:
 
 ## Captura de respuestas (Google Sheets)
 
-El diagnóstico **no es anónimo**: pide nombre completo y correo Nubank, y envía cada
-respuesta a un Google Apps Script al hacer submit. Para activarlo:
+El diagnóstico **no es anónimo**: pide el correo Nubank al inicio y envía cada
+respuesta a un Google Apps Script al terminar el cuestionario. Para activarlo:
 
 1. Crea un Google Sheet y abre **Extensiones → Apps Script**.
 2. Pega un script `doPost(e)` que haga `appendRow` con los campos del payload JSON:
-   `fecha`, `equipo`, `nombre`, `correo`, `rol`, `stack`, `frecuencia`, `profundidad`,
+   `fecha`, `equipo`, `correo`, `rol`, `stack`, `frecuencia`, `profundidad`,
    `construido`, `impacto`, `multiplicar`, `barrera`, `emocion`, `score`, `habitos`, `track`.
 3. Publica como **Web App** (ejecutar como tú, acceso: cualquier persona).
 4. Copia la URL del Web App y pégala en `index.html`, en la constante `APPS_SCRIPT_URL`.
@@ -39,7 +43,7 @@ function doPost(e) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   const d = JSON.parse(e.postData.contents);
   sheet.appendRow([
-    d.fecha, d.nombre, d.correo, d.rol, d.stack, d.frecuencia, d.profundidad,
+    d.fecha, d.correo, d.rol, d.stack, d.frecuencia, d.profundidad,
     d.construido, d.impacto, d.multiplicar, d.barrera, d.emocion,
     d.score, d.habitos, d.track
   ]);

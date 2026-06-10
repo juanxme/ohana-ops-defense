@@ -6,266 +6,231 @@
 <title>Diagnóstico de AI · Ops &amp; Defense Colombia</title>
 <style>
   :root {
-    --paper: #faf8f4;
-    --ink: #23211d;
-    --ink-2: #5c574e;
-    --ink-3: #8d877b;
-    --rule: #d9d4ca;
-    --rule-soft: #e8e4dc;
-    --accent: #6d0aad;
-    --accent-soft: #f1e6f8;
-    --ok: #2d6a4f;
+    --nu-purple: #820AD1;
+    --nu-purple-dark: #6A0AAB;
+    --nu-purple-deep: #2D0A4E;
+    --nu-lilac: #EFE2FB;
+    --nu-lilac-soft: #F8F3FC;
+    --ink: #111111;
+    --ink-2: #58565B;
+    --ink-3: #97939C;
+    --line: #E9E5EE;
+    --white: #FFFFFF;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { font-size: 16px; }
   body {
-    font-family: Georgia, 'Times New Roman', serif;
-    background: var(--paper);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--white);
     color: var(--ink);
-    line-height: 1.55;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
   }
-  .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+
+  .topbar {
+    background: var(--nu-purple);
+    padding: 18px 24px;
+  }
+  .topbar-inner {
+    max-width: 640px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nu-mark {
+    color: #fff; font-weight: 800; font-size: 22px; letter-spacing: -0.02em;
+  }
+  .topbar-tag {
+    color: rgba(255,255,255,0.85); font-size: 12.5px; font-weight: 500;
+    letter-spacing: 0.04em;
+  }
 
   .wrap {
-    max-width: 680px;
+    max-width: 640px;
     margin: 0 auto;
-    padding: 48px 24px 96px;
+    padding: 40px 24px 88px;
   }
 
-  /* ── Header ── */
-  header { border-bottom: 3px double var(--rule); padding-bottom: 28px; margin-bottom: 36px; }
+  .stage { animation: rise 0.35s ease both; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hidden { display: none !important; }
+
+  /* ── Intro ── */
   .kicker {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--ink-3); margin-bottom: 14px;
+    display: inline-block;
+    background: var(--nu-lilac); color: var(--nu-purple-dark);
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 7px 14px; border-radius: 999px; margin-bottom: 22px;
   }
-  .kicker b { color: var(--accent); font-weight: 600; }
-  h1 { font-size: 34px; font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 14px; }
-  .lede { font-size: 17px; color: var(--ink-2); max-width: 560px; }
-  .meta-line {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 12.5px; color: var(--ink-3); margin-top: 18px;
+  h1 {
+    font-size: 38px; font-weight: 800; line-height: 1.12;
+    letter-spacing: -0.025em; margin-bottom: 16px; color: var(--ink);
   }
+  h1 .pop { color: var(--nu-purple); }
+  .lede { font-size: 17px; color: var(--ink-2); margin-bottom: 26px; max-width: 520px; }
+  .meta-line { font-size: 13.5px; color: var(--ink-3); margin-bottom: 30px; }
+  .meta-line b { color: var(--nu-purple); font-weight: 600; }
 
   .note {
-    border-left: 3px solid var(--accent);
-    background: var(--accent-soft);
-    padding: 14px 18px;
-    margin: 28px 0 8px;
-    font-size: 14.5px;
-    color: var(--ink-2);
+    background: var(--nu-lilac-soft);
+    border: 1px solid var(--nu-lilac);
+    border-radius: 16px;
+    padding: 16px 20px;
+    font-size: 14.5px; color: var(--ink-2);
+    margin-bottom: 30px;
   }
+  .note b { color: var(--nu-purple-dark); }
 
-  /* ── Identification ── */
-  .ident { margin: 36px 0 8px; }
-  .ident-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   label.field-label {
-    display: block;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--ink-2); margin-bottom: 6px;
+    display: block; font-size: 13px; font-weight: 600;
+    color: var(--ink); margin-bottom: 8px;
   }
-  input[type="text"], input[type="email"] {
+  input[type="email"] {
     width: 100%;
-    font-family: Georgia, serif;
-    font-size: 16px;
-    color: var(--ink);
-    background: transparent;
-    border: none;
-    border-bottom: 1.5px solid var(--rule);
-    padding: 6px 2px;
-    border-radius: 0;
+    font-family: inherit; font-size: 16px; color: var(--ink);
+    background: var(--white);
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 18px;
     outline: none;
-    transition: border-color 0.15s;
+    transition: border-color 0.15s, box-shadow 0.15s;
   }
-  input[type="text"]:focus, input[type="email"]:focus { border-bottom-color: var(--accent); }
-  input::placeholder { color: var(--ink-3); font-style: italic; }
+  input[type="email"]:focus {
+    border-color: var(--nu-purple);
+    box-shadow: 0 0 0 3px var(--nu-lilac);
+  }
+  input::placeholder { color: var(--ink-3); }
+  .field-error { font-size: 13px; color: #C7232E; margin-top: 8px; display: none; }
 
-  /* ── Sections / questions ── */
-  .section-rule {
-    display: flex; align-items: center; gap: 14px;
-    margin: 44px 0 8px;
-  }
-  .section-rule::after { content: ""; flex: 1; border-top: 1px solid var(--rule); }
-  .section-rule span {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3);
-  }
-
-  .q { padding: 26px 0 4px; }
-  .q + .q { border-top: 1px solid var(--rule-soft); }
-  .q-head { display: flex; gap: 14px; align-items: baseline; margin-bottom: 4px; }
-  .q-num {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 13px; font-weight: 600; color: var(--accent);
-    min-width: 24px;
-  }
-  .q-title { font-size: 19px; font-weight: 700; line-height: 1.3; }
-  .q-help {
-    font-size: 14px; color: var(--ink-3); font-style: italic;
-    margin: 2px 0 14px 38px;
-  }
-
-  .opts { margin-left: 38px; }
-  .opt {
-    display: flex; align-items: flex-start; gap: 12px;
-    padding: 8px 0; cursor: pointer;
-  }
-  .opt input { margin-top: 5px; accent-color: var(--accent); width: 15px; height: 15px; flex-shrink: 0; cursor: pointer; }
-  .opt-body { font-size: 15.5px; }
-  .opt-sub { display: block; font-size: 13px; color: var(--ink-3); }
-  .opt:hover .opt-body { color: var(--accent); }
-
-  .q.missing .q-title { color: #a4262c; }
-  .q.missing::before {
-    content: "Falta responder";
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-    color: #a4262c;
-  }
-
-  /* ── Submit ── */
-  .submit-row { margin-top: 48px; border-top: 3px double var(--rule); padding-top: 28px; }
+  /* ── Buttons (Nu pill style) ── */
   .btn {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 15px; font-weight: 600;
-    background: var(--ink); color: var(--paper);
-    border: none; padding: 14px 32px; cursor: pointer;
-    letter-spacing: 0.02em;
+    font-family: inherit;
+    font-size: 15.5px; font-weight: 700;
+    background: var(--nu-purple); color: #fff;
+    border: none; border-radius: 999px;
+    padding: 15px 36px; cursor: pointer;
+    transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
   }
-  .btn:hover { background: var(--accent); }
-  .btn:disabled { background: var(--ink-3); cursor: wait; }
+  .btn:hover { background: var(--nu-purple-dark); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(130,10,209,0.25); }
+  .btn:disabled { background: var(--nu-lilac); color: #C2A3DC; cursor: not-allowed; transform: none; box-shadow: none; }
   .btn-ghost {
-    background: transparent; color: var(--ink-2);
-    border: 1px solid var(--rule); margin-left: 12px;
+    background: transparent; color: var(--nu-purple);
+    border: 1.5px solid var(--nu-lilac);
   }
-  .btn-ghost:hover { background: transparent; color: var(--accent); border-color: var(--accent); }
-  .submit-hint { font-size: 13px; color: var(--ink-3); margin-top: 12px; font-style: italic; }
-  .error-msg {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 13.5px; color: #a4262c; margin-bottom: 14px; display: none;
-  }
+  .btn-ghost:hover { background: var(--nu-lilac-soft); box-shadow: none; }
+  .btn-ghost:disabled { opacity: 0.35; background: transparent; color: var(--nu-purple); cursor: not-allowed; }
 
-  /* ── Result ── */
-  .result { display: none; }
-  .result-head { border-bottom: 3px double var(--rule); padding-bottom: 24px; margin-bottom: 28px; }
-  .result-for {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3);
-    margin-bottom: 10px;
+  /* ── Progress ── */
+  .progress { margin-bottom: 30px; }
+  .progress-track {
+    height: 8px; background: var(--nu-lilac-soft);
+    border-radius: 999px; overflow: hidden;
   }
-  .result-track { font-size: 38px; font-weight: 700; line-height: 1.1; }
-  .result-track em { font-style: italic; color: var(--accent); }
-  .result-desc { font-size: 16.5px; color: var(--ink-2); margin-top: 12px; max-width: 540px; }
+  .progress-fill {
+    height: 100%; width: 0;
+    background: var(--nu-purple);
+    border-radius: 999px;
+    transition: width 0.35s ease;
+  }
+  .progress-text { font-size: 13px; color: var(--ink-3); margin-top: 10px; font-weight: 500; }
+  .progress-text b { color: var(--nu-purple); }
 
-  .scores { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; margin: 8px 0 12px; }
-  .score-row { padding: 16px 0; border-bottom: 1px solid var(--rule-soft); }
-  .score-label {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3);
-    display: flex; justify-content: space-between; margin-bottom: 8px;
-  }
-  .score-label b { color: var(--ink); font-size: 13px; }
-  .bar { height: 7px; background: var(--rule-soft); position: relative; }
-  .bar i {
-    position: absolute; left: 0; top: 0; bottom: 0;
-    background: var(--accent); width: 0;
-    transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-  }
+  /* ── Question ── */
+  .q-title { font-size: 25px; font-weight: 800; line-height: 1.22; letter-spacing: -0.015em; margin-bottom: 8px; }
+  .q-help { font-size: 14.5px; color: var(--ink-3); margin-bottom: 24px; }
 
-  .result h3 {
-    font-size: 14px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    margin: 36px 0 10px; color: var(--ink);
-    border-bottom: 1px solid var(--rule); padding-bottom: 8px;
+  .opts { display: flex; flex-direction: column; gap: 12px; }
+  .opt {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: var(--white);
+    border: 1.5px solid var(--line);
+    border-radius: 16px;
+    padding: 16px 18px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    width: 100%; text-align: left; font-family: inherit;
   }
-  .result ul { list-style: none; }
-  .result ul li {
-    padding: 9px 0 9px 22px; position: relative;
-    font-size: 15.5px; border-bottom: 1px solid var(--rule-soft);
+  .opt:hover { border-color: var(--nu-purple); background: var(--nu-lilac-soft); }
+  .opt.selected {
+    border-color: var(--nu-purple);
+    background: var(--nu-lilac-soft);
+    box-shadow: 0 0 0 3px var(--nu-lilac);
   }
-  .result ul li:last-child { border-bottom: none; }
-  .result ul li::before {
-    content: "—"; position: absolute; left: 0; color: var(--accent);
+  .opt-check {
+    width: 22px; height: 22px; flex-shrink: 0; margin-top: 1px;
+    border: 2px solid var(--line); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s; background: #fff;
   }
-  .result a { color: var(--accent); }
-  .saved-tag {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 12.5px; color: var(--ok); margin-top: 20px;
+  .opt.box .opt-check { border-radius: 7px; }
+  .opt.selected .opt-check { background: var(--nu-purple); border-color: var(--nu-purple); }
+  .opt.selected .opt-check::after {
+    content: ""; width: 10px; height: 6px;
+    border-left: 2.5px solid #fff; border-bottom: 2.5px solid #fff;
+    transform: rotate(-45deg) translate(0.5px, -1px);
   }
-  .saved-tag.fail { color: #a4262c; }
+  .opt-body { font-size: 15.5px; font-weight: 600; color: var(--ink); line-height: 1.35; }
+  .opt-sub { display: block; font-size: 13px; font-weight: 400; color: var(--ink-3); margin-top: 2px; }
+
+  .nav { display: flex; justify-content: space-between; align-items: center; margin-top: 34px; gap: 12px; }
+
+  /* ── Thanks ── */
+  .thanks { text-align: center; padding-top: 26px; }
+  .thanks-icon {
+    width: 96px; height: 96px; border-radius: 50%;
+    background: var(--nu-purple);
+    color: #fff; font-size: 42px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 30px;
+    box-shadow: 0 16px 40px rgba(130,10,209,0.3);
+  }
+  .thanks h2 { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 16px; }
+  .thanks h2 .pop { color: var(--nu-purple); }
+  .thanks p { font-size: 16.5px; color: var(--ink-2); max-width: 460px; margin: 0 auto 12px; }
+  .thanks .signature {
+    margin-top: 30px; font-size: 15px; color: var(--nu-purple-dark); font-weight: 700;
+  }
+  .thanks .saved-warn {
+    display: inline-block; margin-top: 26px;
+    background: #FFF4E5; color: #8A5300;
+    font-size: 13px; border-radius: 12px; padding: 10px 16px;
+  }
 
   footer {
-    margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--rule);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: 12px; color: var(--ink-3);
+    max-width: 640px; margin: 0 auto; padding: 0 24px 40px;
+    font-size: 12.5px; color: var(--ink-3);
   }
 
-  @media (max-width: 560px) {
-    h1 { font-size: 27px; }
-    .ident-grid, .scores { grid-template-columns: 1fr; }
-    .q-help, .opts { margin-left: 0; }
-    .result-track { font-size: 30px; }
+  @media (max-width: 540px) {
+    h1 { font-size: 30px; }
+    .q-title { font-size: 21px; }
+    .thanks h2 { font-size: 27px; }
   }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <!-- ════════ FORM ════════ -->
-  <div id="form-view">
-    <header>
-      <p class="kicker">Programa Ohana &nbsp;·&nbsp; <b>Ops &amp; Defense</b> &nbsp;·&nbsp; Colombia</p>
-      <h1>Diagnóstico de adopción de AI</h1>
-      <p class="lede">Queremos saber dónde está cada persona del equipo hoy: qué herramientas usa, con qué profundidad y qué le está estorbando. Con eso armamos el plan de acompañamiento de cada uno.</p>
-      <p class="meta-line sans">9 preguntas · ~3 minutos · Los resultados se registran con tu nombre</p>
-    </header>
-
-    <div class="note">
-      No hay respuestas buenas ni malas, y nadie va a ser evaluado por esto. Pero sí necesitamos honestidad: responde según donde estás <em>hoy</em>, no donde quisieras estar.
-    </div>
-
-    <!-- Identificación -->
-    <div class="ident">
-      <div class="section-rule"><span>Tus datos</span></div>
-      <div class="q" id="q-ident" style="border-top:none">
-        <div class="ident-grid">
-          <div>
-            <label class="field-label" for="nombre">Nombre completo *</label>
-            <input type="text" id="nombre" placeholder="Como apareces en Slack" autocomplete="name" />
-          </div>
-          <div>
-            <label class="field-label" for="correo">Correo Nubank *</label>
-            <input type="email" id="correo" placeholder="tu.nombre@nubank.com.co" autocomplete="email" />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-rule"><span>El cuestionario</span></div>
-    <div id="questions"></div>
-
-    <div class="submit-row">
-      <p class="error-msg" id="error-msg">Revisa los campos marcados: falta tu nombre, correo o alguna pregunta por responder.</p>
-      <button class="btn" id="btn-submit" onclick="submitForm()">Enviar y ver mi resultado</button>
-      <p class="submit-hint">Al enviar, tus respuestas quedan registradas en la hoja de seguimiento del equipo.</p>
-    </div>
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="nu-mark">nu</span>
+    <span class="topbar-tag">Ohana · Ops &amp; Defense · Colombia</span>
   </div>
-
-  <!-- ════════ RESULT ════════ -->
-  <div class="result" id="result-view"></div>
-
-  <footer>
-    Ohana · Ops &amp; Defense Colombia — Si tienes dudas sobre este diagnóstico, escríbenos por Slack.
-  </footer>
 </div>
+
+<div class="wrap">
+  <main id="root"></main>
+</div>
+
+<footer id="footer">
+  Programa Ohana · Ops &amp; Defense Colombia — ¿Dudas? Escríbenos por Slack.
+</footer>
 
 <script>
 /* ──────────────────────────────────────────────────────────────────────
    CONFIG · Google Sheets (Apps Script)
-   Pega aquí la URL del Web App de Apps Script. El payload incluye
-   nombre y correo: este diagnóstico NO es anónimo.
+   Pega aquí la URL del Web App. Cada envío guarda una fila con el
+   correo, todas las respuestas, el score y el track calculado.
    ────────────────────────────────────────────────────────────────────── */
 const APPS_SCRIPT_URL = 'TU_URL_AQUI';
 
@@ -398,114 +363,21 @@ const QUESTIONS = [
 
 const SCORED = ['stack', 'frecuencia', 'profundidad', 'construido', 'impacto', 'multiplicar'];
 
-const TRACKS = {
-  1: {
-    name: 'Track 1', label: 'Explorador',
-    desc: 'Estás dando los primeros pasos reales con AI. Hay mucho potencial sin explotar, y el plan para ti empieza por lo básico bien hecho.',
-    blind: [
-      'AI todavía no es parte de tu rutina: el uso es esporádico o nulo',
-      'Las tareas repetitivas de tu operación las sigues haciendo 100% manual',
-      'Aún no tienes el stack básico (Claude, Glean) funcionando en tu día a día',
-    ],
-    next: [
-      'Instala y configura Claude y Glean esta semana — sin el stack listo, nada de lo demás es posible',
-      'Elige una tarea repetitiva de tu semana (resumen de casos, redacción de reportes, búsqueda de procedimientos) y hazla con AI durante 5 días seguidos',
-      'Pídele a Claude que te explique un procedimiento o política interna en lenguaje simple antes de tu próximo caso complejo',
-    ],
-    ohana: [
-      { t: 'Claude 101 — Empezar a usar Claude en tu trabajo', u: 'https://anthropic.skilljar.com/claude-101' },
-      { t: 'AI Fluency: Framework & Foundations', u: 'https://anthropic.skilljar.com/ai-fluency-framework-foundations' },
-    ]
-  },
-  2: {
-    name: 'Track 2', label: 'Practicante',
-    desc: 'Ya usas AI con regularidad. Tu siguiente paso es dejar de ser solo usuario y empezar a crear flujos reproducibles que impacten al equipo.',
-    blind: [
-      'El uso sigue siendo reactivo: cuando estás atascado, no como práctica sistemática',
-      'No tienes prompts reutilizables para tus tareas más frecuentes de operación o defensa',
-      'Lo que aprendes se queda contigo: todavía no lo multiplicas en el equipo',
-    ],
-    next: [
-      'Construye un prompt template para tus 3 tareas más recurrentes (análisis de casos, reportes de turno, revisión de alertas) y refínalo durante una semana',
-      'Comparte uno de esos templates con al menos otra persona del equipo y valida si le sirve',
-      'Identifica un proceso de tu operación que se pueda semi-automatizar con AI y propón un piloto',
-    ],
-    ohana: [
-      { t: 'AI Fluency: Framework & Foundations', u: 'https://anthropic.skilljar.com/ai-fluency-framework-foundations' },
-      { t: 'Introduction to MCP — Conecta Claude con tus herramientas', u: 'https://anthropic.skilljar.com/introduction-to-model-context-protocol' },
-    ]
-  },
-  3: {
-    name: 'Track 3', label: 'Multiplicador',
-    desc: 'Eres referente de AI en Ops & Defense. Tu reto ya no es personal: es diseñar cómo el equipo entero sube de nivel contigo.',
-    blind: [
-      'Tus flujos funcionan para ti, pero quizá no están documentados para que otros los adopten',
-      'El conocimiento que generas aún no se convierte en estándares de equipo',
-      'Quizá no estás usando AI para decisiones de alto impacto (priorización, estrategia de detección, diseño de procesos)',
-    ],
-    next: [
-      'Documenta uno de tus flujos de AI como un runbook que cualquier persona del equipo pueda seguir sin ayuda',
-      'Propón un espacio recurrente (15 min semanales) donde el equipo comparta qué funcionó y qué no con AI',
-      'Lleva AI a una decisión de alto nivel: dale contexto de la operación a Claude y pídele que desafíe tu enfoque actual',
-    ],
-    ohana: [
-      { t: 'MCP: Advanced Topics', u: 'https://anthropic.skilljar.com/model-context-protocol-advanced-topics' },
-      { t: 'Introduction to Agent Skills', u: 'https://anthropic.skilljar.com/introduction-to-agent-skills' },
-      { t: 'Building with the Claude API', u: 'https://anthropic.skilljar.com/claude-with-the-anthropic-api' },
-    ]
-  }
-};
+/* ──────────────────────────────────────────────────────────────────────
+   STATE
+   ────────────────────────────────────────────────────────────────────── */
+let screen = 'intro';   // intro | quiz | thanks
+let currentQ = 0;
+let correo = '';
+let sendStatus = null;
+const answers = {};     // id -> array de índices
 
 /* ──────────────────────────────────────────────────────────────────────
-   RENDER DEL FORMULARIO (una sola página, estilo cuestionario)
+   SCORING (no se muestra al usuario; va al sheet)
    ────────────────────────────────────────────────────────────────────── */
-function renderForm() {
-  const container = document.getElementById('questions');
-  container.innerHTML = QUESTIONS.map((q, qi) => {
-    const opts = q.options.map((o, oi) => `
-      <label class="opt">
-        <input type="${q.type}" name="${q.id}" value="${oi}" ${o.exclusive ? 'data-exclusive="1"' : ''} onchange="onChange('${q.id}', this)" />
-        <span class="opt-body">${o.text}${o.sub ? `<span class="opt-sub">${o.sub}</span>` : ''}</span>
-      </label>
-    `).join('');
-    return `
-      <div class="q" id="q-${q.id}">
-        <div class="q-head">
-          <span class="q-num sans">${qi + 1}.</span>
-          <span class="q-title">${q.title}</span>
-        </div>
-        ${q.help ? `<p class="q-help">${q.help}</p>` : ''}
-        <div class="opts">${opts}</div>
-      </div>
-    `;
-  }).join('');
-}
-
-function onChange(qId, input) {
-  document.getElementById('q-' + qId).classList.remove('missing');
-  const q = QUESTIONS.find(x => x.id === qId);
-  if (q.type !== 'checkbox') return;
-  const boxes = [...document.querySelectorAll(`input[name="${qId}"]`)];
-  if (input.dataset.exclusive && input.checked) {
-    boxes.forEach(b => { if (b !== input) b.checked = false; });
-  } else if (input.checked) {
-    boxes.forEach(b => { if (b.dataset.exclusive) b.checked = false; });
-  }
-}
-
-/* ──────────────────────────────────────────────────────────────────────
-   LECTURA Y SCORING
-   ────────────────────────────────────────────────────────────────────── */
-function selectedIdx(qId) {
-  return [...document.querySelectorAll(`input[name="${qId}"]:checked`)].map(i => +i.value);
-}
-function answerText(qId) {
-  const q = QUESTIONS.find(x => x.id === qId);
-  return selectedIdx(qId).map(i => q.options[i].text).join(' | ');
-}
 function questionScore(q) {
   if (!q.scores) return 0;
-  return selectedIdx(q.id).reduce((s, i) => s + (q.scores[i] || 0), 0);
+  return (answers[q.id] || []).reduce((s, i) => s + (q.scores[i] || 0), 0);
 }
 function questionMax(q) {
   if (!q.scores) return 0;
@@ -525,33 +397,19 @@ function computeHabitos() {
   const b = QUESTIONS.find(q => q.id === 'multiplicar');
   return Math.round(((questionScore(a) + questionScore(b)) / (questionMax(a) + questionMax(b))) * 100);
 }
-function getTrack(score) {
-  if (score <= 40) return TRACKS[1];
-  if (score <= 70) return TRACKS[2];
-  return TRACKS[3];
+function trackName(score) {
+  if (score <= 40) return 'Track 1 · Explorador';
+  if (score <= 70) return 'Track 2 · Practicante';
+  return 'Track 3 · Multiplicador';
+}
+function answerText(qId) {
+  const q = QUESTIONS.find(x => x.id === qId);
+  return (answers[qId] || []).map(i => q.options[i].text).join(' | ');
 }
 
 /* ──────────────────────────────────────────────────────────────────────
-   ENVÍO
+   SHEETS
    ────────────────────────────────────────────────────────────────────── */
-function validate() {
-  let ok = true;
-  const nombre = document.getElementById('nombre').value.trim();
-  const correo = document.getElementById('correo').value.trim();
-  if (!nombre || !correo || !correo.includes('@')) {
-    document.getElementById('q-ident').classList.add('missing');
-    ok = false;
-  } else {
-    document.getElementById('q-ident').classList.remove('missing');
-  }
-  QUESTIONS.forEach(q => {
-    const el = document.getElementById('q-' + q.id);
-    if (selectedIdx(q.id).length === 0) { el.classList.add('missing'); ok = false; }
-    else el.classList.remove('missing');
-  });
-  return ok;
-}
-
 function sendToSheets(payload) {
   if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'TU_URL_AQUI') return Promise.resolve('skipped');
   return fetch(APPS_SCRIPT_URL, {
@@ -562,27 +420,149 @@ function sendToSheets(payload) {
   }).then(() => 'ok').catch(() => 'fail');
 }
 
-function submitForm() {
-  const errEl = document.getElementById('error-msg');
-  if (!validate()) {
-    errEl.style.display = 'block';
-    const firstMissing = document.querySelector('.missing');
-    if (firstMissing) firstMissing.scrollIntoView({ behavior: 'smooth', block: 'center' });
+/* ──────────────────────────────────────────────────────────────────────
+   RENDER
+   ────────────────────────────────────────────────────────────────────── */
+const root = document.getElementById('root');
+
+function render() {
+  if (screen === 'intro') renderIntro();
+  else if (screen === 'quiz') renderQuiz();
+  else renderThanks();
+  window.scrollTo(0, 0);
+}
+
+function renderIntro() {
+  root.innerHTML = `
+    <section class="stage">
+      <span class="kicker">Programa Ohana</span>
+      <h1>Cuéntanos cómo vas <span class="pop">con la AI</span></h1>
+      <p class="lede">Queremos saber dónde está cada persona de Ops &amp; Defense hoy: qué herramientas usa, con qué profundidad y qué le está estorbando. Con eso armamos el plan de acompañamiento de cada uno.</p>
+      <p class="meta-line"><b>9 preguntas</b> · ~3 minutos · Tus respuestas quedan registradas con tu correo</p>
+      <div class="note">
+        <b>Antes de empezar:</b> no hay respuestas buenas ni malas, y nadie va a ser evaluado por esto. Responde según donde estás <em>hoy</em>, no donde quisieras estar.
+      </div>
+      <div style="margin-bottom:28px;">
+        <label class="field-label" for="correo">Tu correo Nubank</label>
+        <input type="email" id="correo" placeholder="tu.nombre@nubank.com.co" autocomplete="email" value="${correo}" />
+        <p class="field-error" id="correo-error">Ingresa tu correo Nubank para continuar.</p>
+      </div>
+      <button class="btn" onclick="startQuiz()">Empezar →</button>
+    </section>
+  `;
+  const input = document.getElementById('correo');
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') startQuiz(); });
+}
+
+function renderQuiz() {
+  const q = QUESTIONS[currentQ];
+  const total = QUESTIONS.length;
+  const sel = answers[q.id] || [];
+  const pct = Math.round((currentQ / total) * 100);
+  const isLast = currentQ === total - 1;
+
+  const opts = q.options.map((o, i) => `
+    <button class="opt ${q.type === 'checkbox' ? 'box' : ''} ${sel.includes(i) ? 'selected' : ''}" onclick="selectOption(${i})">
+      <span class="opt-check"></span>
+      <span class="opt-body">${o.text}${o.sub ? `<span class="opt-sub">${o.sub}</span>` : ''}</span>
+    </button>
+  `).join('');
+
+  root.innerHTML = `
+    <section class="stage">
+      <div class="progress">
+        <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+        <p class="progress-text">Pregunta <b>${currentQ + 1}</b> de ${total}</p>
+      </div>
+      <h2 class="q-title">${q.title}</h2>
+      ${q.help ? `<p class="q-help">${q.help}</p>` : ''}
+      <div class="opts">${opts}</div>
+      <div class="nav">
+        <button class="btn btn-ghost" onclick="goBack()" ${currentQ === 0 ? 'disabled' : ''}>← Atrás</button>
+        <button class="btn" id="btn-next" onclick="goNext()" ${sel.length === 0 ? 'disabled' : ''}>${isLast ? 'Enviar respuestas' : 'Siguiente →'}</button>
+      </div>
+    </section>
+  `;
+}
+
+function renderThanks() {
+  let warn = '';
+  if (sendStatus === 'fail') {
+    warn = '<span class="saved-warn">No pudimos registrar tus respuestas automáticamente — avísanos por Slack para guardarlas manualmente.</span>';
+  }
+  root.innerHTML = `
+    <section class="stage thanks">
+      <div class="thanks-icon">💜</div>
+      <h2>¡Gracias por <span class="pop">responder</span>!</h2>
+      <p>Tus respuestas ya quedaron registradas. Con ellas vamos a armar un plan de acompañamiento a tu medida, para que la AI te quite trabajo y no te lo sume.</p>
+      <p><strong>Pronto estaremos en contacto contigo.</strong></p>
+      <p class="signature">— El equipo Ohana de Ops &amp; Defense 💜</p>
+      ${warn}
+    </section>
+  `;
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   INTERACTIONS
+   ────────────────────────────────────────────────────────────────────── */
+function startQuiz() {
+  const input = document.getElementById('correo');
+  const err = document.getElementById('correo-error');
+  const value = input.value.trim().toLowerCase();
+  if (!value || !value.includes('@')) {
+    err.style.display = 'block';
+    input.focus();
     return;
   }
-  errEl.style.display = 'none';
-  const btn = document.getElementById('btn-submit');
+  correo = value;
+  screen = 'quiz';
+  currentQ = 0;
+  render();
+}
+
+function selectOption(idx) {
+  const q = QUESTIONS[currentQ];
+  const sel = answers[q.id] || [];
+  if (q.type === 'radio') {
+    answers[q.id] = [idx];
+  } else {
+    const opt = q.options[idx];
+    if (opt.exclusive) {
+      answers[q.id] = sel.includes(idx) ? [] : [idx];
+    } else {
+      let next = sel.filter(i => !q.options[i].exclusive);
+      if (next.includes(idx)) next = next.filter(i => i !== idx);
+      else next.push(idx);
+      answers[q.id] = next;
+    }
+  }
+  render();
+}
+
+function goBack() {
+  if (currentQ > 0) { currentQ--; render(); }
+}
+
+function goNext() {
+  if ((answers[QUESTIONS[currentQ].id] || []).length === 0) return;
+  if (currentQ < QUESTIONS.length - 1) {
+    currentQ++;
+    render();
+    return;
+  }
+  submitAll();
+}
+
+function submitAll() {
+  const btn = document.getElementById('btn-next');
   btn.disabled = true;
   btn.textContent = 'Enviando…';
 
   const score = computeAdoption();
-  const habitos = computeHabitos();
-  const track = getTrack(score);
   const payload = {
     fecha: new Date().toISOString(),
     equipo: 'Ops & Defense Colombia',
-    nombre: document.getElementById('nombre').value.trim(),
-    correo: document.getElementById('correo').value.trim(),
+    correo: correo,
     rol: answerText('role'),
     stack: answerText('stack'),
     frecuencia: answerText('frecuencia'),
@@ -593,73 +573,18 @@ function submitForm() {
     barrera: answerText('barrera'),
     emocion: answerText('emocion'),
     score: score,
-    habitos: habitos,
-    track: track.name + ' · ' + track.label
+    habitos: computeHabitos(),
+    track: trackName(score)
   };
 
-  sendToSheets(payload).then(status => showResult(payload, track, status));
-}
-
-/* ──────────────────────────────────────────────────────────────────────
-   RESULTADO
-   ────────────────────────────────────────────────────────────────────── */
-function showResult(p, track, sendStatus) {
-  document.getElementById('form-view').style.display = 'none';
-  const view = document.getElementById('result-view');
-
-  let savedHtml = '';
-  if (sendStatus === 'ok') savedHtml = '<p class="saved-tag">✓ Respuestas registradas a nombre de ' + p.nombre + '</p>';
-  else if (sendStatus === 'fail') savedHtml = '<p class="saved-tag fail">No pudimos registrar tus respuestas — avísanos por Slack y comparte una captura de este resultado.</p>';
-
-  view.innerHTML = `
-    <div class="result-head">
-      <p class="result-for">Resultado · ${p.nombre} · ${p.rol}</p>
-      <p class="result-track">${track.name} — <em>${track.label}</em></p>
-      <p class="result-desc">${track.desc}</p>
-      ${savedHtml}
-    </div>
-
-    <div class="scores">
-      <div class="score-row">
-        <p class="score-label">Adopción de AI <b>${p.score}%</b></p>
-        <div class="bar"><i id="bar-adopt"></i></div>
-      </div>
-      <div class="score-row">
-        <p class="score-label">Hábitos &amp; multiplicación <b>${p.habitos}%</b></p>
-        <div class="bar"><i id="bar-hab"></i></div>
-      </div>
-    </div>
-
-    <h3>Tu punto ciego</h3>
-    <ul>${track.blind.map(b => `<li>${b}</li>`).join('')}</ul>
-
-    <h3>Tu próximo paso concreto</h3>
-    <ul>${track.next.map(n => `<li>${n}</li>`).join('')}</ul>
-
-    <h3>En Ohana te recomendamos</h3>
-    <ul>${track.ohana.map(o => `<li><a href="${o.u}" target="_blank" rel="noopener">${o.t}</a></li>`).join('')}</ul>
-
-    ${p.barrera !== 'Ya la uso bastante, mi barrera es otra' ? `
-    <h3>Sobre tu barrera</h3>
-    <ul><li>Mencionaste: <em>“${p.barrera}”</em>. Esto es exactamente lo que el programa Ohana está diseñado para resolver — cuenta con eso para tu plan.</li></ul>
-    ` : ''}
-
-    <div class="submit-row">
-      <button class="btn btn-ghost" onclick="location.reload()">Responder de nuevo</button>
-    </div>
-  `;
-  view.style.display = 'block';
-  window.scrollTo(0, 0);
-
-  requestAnimationFrame(() => {
-    setTimeout(() => {
-      document.getElementById('bar-adopt').style.width = p.score + '%';
-      document.getElementById('bar-hab').style.width = p.habitos + '%';
-    }, 100);
+  sendToSheets(payload).then(status => {
+    sendStatus = status;
+    screen = 'thanks';
+    render();
   });
 }
 
-renderForm();
+render();
 </script>
 </body>
 </html>
