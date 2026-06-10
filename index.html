@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>¿Cuál es tu track de AI? · Ohana Ops & Defense Colombia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --purple: #820AD1;
+    --purple-dark: #5B0894;
+    --purple-light: #B061E5;
+    --purple-50: #FBF5FF;
+    --purple-100: #F3E5FF;
+    --purple-200: #E5C9FA;
+    --purple-300: #D4A8F2;
+    --green: #34C759;
+    --blue: #2E7CF6;
+    --amber: #E17055;
+    --ink: #1A0B2E;
+    --ink-soft: #4B3A66;
+    --muted: #8A7AA0;
+    --line: rgba(130, 10, 209, 0.12);
+    --bg: #FFFFFF;
+    --shadow-sm: 0 4px 16px rgba(130, 10, 209, 0.06);
+    --shadow-md: 0 12px 32px rgba(130, 10, 209, 0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  body {
+    background:
+      radial-gradient(ellipse 800px 600px at 10% -10%, rgba(130, 10, 209, 0.08), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 110% 110%, rgba(176, 97, 229, 0.10), transparent 60%),
+      linear-gradient(180deg, #FFFFFF 0%, #FDFAFF 100%);
+    background-attachment: fixed;
+  }
+  .app {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 24px 80px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .stage { animation: stageIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  @keyframes stageIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* === WELCOME === */
+  .welcome { text-align: center; padding: 24px 8px 40px; }
+  .logo-wrap { display: flex; justify-content: center; margin-bottom: 28px; animation: floatY 4s ease-in-out infinite; }
+  @keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  .logo-badge {
+    width: 120px; height: 120px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple) 50%, var(--purple-light) 100%);
+    box-shadow: 0 16px 48px rgba(130, 10, 209, 0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 52px;
+  }
+  .welcome h1 {
+    font-size: 42px; font-weight: 800; line-height: 1.08;
+    letter-spacing: -0.02em; margin-bottom: 12px;
+  }
+  .welcome h1 .accent {
+    background: linear-gradient(120deg, var(--purple) 0%, var(--purple-light) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+    color: var(--purple); text-transform: uppercase; margin-bottom: 12px;
+  }
+  .welcome .subtitle {
+    font-size: 16px; color: var(--ink-soft); line-height: 1.55;
+    max-width: 500px; margin: 0 auto 28px;
+  }
+  .pills { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+  .pill {
+    padding: 7px 16px; border-radius: 999px; font-size: 13px; font-weight: 600;
+    border: 1.5px solid; background: white;
+  }
+  .pill.t1 { color: var(--green); border-color: rgba(52,199,89,0.35); background: rgba(52,199,89,0.06); }
+  .pill.t2 { color: var(--blue); border-color: rgba(46,124,246,0.35); background: rgba(46,124,246,0.06); }
+  .pill.t3 { color: var(--purple); border-color: rgba(130,10,209,0.35); background: rgba(130,10,209,0.06); }
+  .meta {
+    font-size: 14px; color: var(--muted); margin-bottom: 24px;
+    display: flex; justify-content: center; align-items: center; gap: 8px;
+  }
+  .meta .dot { width: 3px; height: 3px; background: var(--muted); border-radius: 50%; }
+  .honesty {
+    background: var(--purple-50); border: 1px solid var(--purple-200);
+    border-radius: 14px; padding: 16px 20px; max-width: 520px;
+    margin: 0 auto 28px; text-align: left;
+    font-size: 13px; line-height: 1.6; color: var(--purple-dark);
+  }
+  .start-btn {
+    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
+    color: white; border: none; padding: 16px 40px;
+    font-size: 16px; font-weight: 600; border-radius: 14px; cursor: pointer;
+    box-shadow: 0 8px 24px rgba(130, 10, 209, 0.25);
+    transition: transform 0.2s, box-shadow 0.2s; font-family: inherit;
+  }
+  .start-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(130, 10, 209, 0.35); }
+
+  /* === PROGRESS === */
+  .progress-wrap { margin-bottom: 28px; }
+  .progress-bar { height: 6px; background: var(--purple-100); border-radius: 999px; overflow: hidden; }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--purple), var(--purple-light));
+    border-radius: 999px; transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1); width: 0%;
+  }
+  .progress-label { font-size: 12px; color: var(--muted); margin-top: 8px; }
+
+  /* === QUESTION === */
+  .question-card {
+    background: white; border: 1px solid var(--line); border-radius: 24px;
+    padding: 32px; box-shadow: var(--shadow-sm);
+    animation: cardIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .q-eyebrow {
+    font-size: 12px; font-weight: 600; color: var(--purple);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;
+  }
+  .q-title { font-size: 23px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 8px; }
+  .q-help { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option {
+    background: white; border: 1.5px solid var(--line); border-radius: 14px;
+    padding: 14px 16px; cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: flex-start; gap: 14px;
+    font-size: 15px; font-weight: 500; color: var(--ink);
+    text-align: left; width: 100%; font-family: inherit;
+  }
+  .option:hover { border-color: var(--purple-200); background: var(--purple-50); transform: translateX(2px); }
+  .option.selected {
+    border-color: var(--purple);
+    background: linear-gradient(135deg, rgba(130,10,209,0.05) 0%, rgba(176,97,229,0.05) 100%);
+    box-shadow: 0 0 0 3px rgba(130, 10, 209, 0.08);
+  }
+  .option .check {
+    width: 22px; height: 22px; border-radius: 6px;
+    border: 1.5px solid var(--purple-200); flex-shrink: 0; margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    background: white; transition: all 0.2s;
+  }
+  .option.radio .check { border-radius: 50%; }
+  .option.selected .check { background: var(--purple); border-color: var(--purple); }
+  .option.selected .check::after {
+    content: ""; width: 10px; height: 6px;
+    border-left: 2px solid white; border-bottom: 2px solid white;
+    transform: rotate(-45deg) translate(1px, -1px);
+  }
+  .option.radio.selected .check::after {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: white; border: none; transform: none;
+  }
+  .opt-text { line-height: 1.4; }
+  .opt-sub { display: block; font-size: 12.5px; font-weight: 400; color: var(--muted); margin-top: 2px; }
+
+  /* === NAV === */
+  .nav { display: flex; justify-content: space-between; align-items: center; margin-top: 28px; gap: 12px; }
+  .back-btn {
+    background: transparent; border: 1.5px solid var(--line); color: var(--ink-soft);
+    padding: 12px 20px; border-radius: 12px; cursor: pointer;
+    font-size: 14px; font-weight: 600; font-family: inherit; transition: all 0.2s;
+  }
+  .back-btn:hover { background: var(--purple-50); border-color: var(--purple-200); }
+  .back-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .next-btn {
+    background: var(--purple); color: white; border: none;
+    padding: 14px 28px; border-radius: 12px; cursor: pointer;
+    font-size: 15px; font-weight: 600; font-family: inherit; transition: all 0.25s;
+    box-shadow: 0 6px 20px rgba(130, 10, 209, 0.25); margin-left: auto;
+  }
+  .next-btn:disabled { background: var(--purple-100); color: var(--purple-300); cursor: not-allowed; box-shadow: none; }
+  .next-btn:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(130, 10, 209, 0.35); }
+
+  /* === RESULTS === */
+  .results { animation: stageIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .result-hero { text-align: center; margin-bottom: 20px; }
+  .role-badge {
+    display: inline-block; padding: 6px 18px; border-radius: 999px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    background: var(--purple-100); color: var(--purple-dark); margin-bottom: 16px;
+  }
+  .track-card {
+    border-radius: 24px; padding: 40px 28px; margin-bottom: 24px;
+    color: white; position: relative; overflow: hidden;
+    box-shadow: var(--shadow-md); text-align: center;
+  }
+  .track-card.t1 { background: linear-gradient(135deg, #34C759 0%, #1FA34A 100%); }
+  .track-card.t2 { background: linear-gradient(135deg, #2E7CF6 0%, #1E5DC9 100%); }
+  .track-card.t3 { background: linear-gradient(135deg, #820AD1 0%, #B061E5 100%); }
+  .track-card::before {
+    content: ""; position: absolute; top: -40px; right: -40px;
+    width: 200px; height: 200px; background: rgba(255,255,255,0.12); border-radius: 50%;
+  }
+  .track-label {
+    font-size: 12px; font-weight: 700; opacity: 0.85;
+    letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; position: relative;
+  }
+  .track-name { font-size: 34px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 10px; position: relative; }
+  .track-desc { font-size: 15px; line-height: 1.55; opacity: 0.95; position: relative; max-width: 460px; margin: 0 auto; }
+
+  .rings { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .ring-card {
+    background: white; border: 1px solid var(--line); border-radius: 20px;
+    padding: 24px; text-align: center; box-shadow: var(--shadow-sm);
+  }
+  .ring-svg { width: 110px; height: 110px; transform: rotate(-90deg); margin: 0 auto 10px; display: block; }
+  .ring-track { fill: none; stroke: var(--purple-100); stroke-width: 8; }
+  .ring-fill {
+    fill: none; stroke: var(--purple); stroke-width: 8; stroke-linecap: round;
+    stroke-dasharray: 188; stroke-dashoffset: 188;
+    transition: stroke-dashoffset 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .ring-fill.env { stroke: var(--purple-light); }
+  .ring-label {
+    font-size: 12px; color: var(--muted); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px;
+  }
+  .ring-value { font-size: 30px; font-weight: 800; color: var(--purple); letter-spacing: -0.02em; }
+  .ring-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  .rec-section {
+    background: white; border: 1px solid var(--line); border-radius: 20px;
+    padding: 22px 24px; margin-bottom: 14px; box-shadow: var(--shadow-sm);
+  }
+  .rec-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .rec-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 9px 0; border-bottom: 1px solid var(--line);
+    font-size: 14px; line-height: 1.55; color: var(--ink);
+  }
+  .rec-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .rec-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 7px; }
+  .ohana-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--purple-50); color: var(--purple-dark);
+    border: 1px solid var(--purple-200); border-radius: 8px;
+    padding: 7px 13px; font-size: 13px; margin: 4px 6px 4px 0;
+    text-decoration: none; transition: all 0.15s;
+  }
+  .ohana-link:hover { background: var(--purple-100); }
+
+  .repeat-btn {
+    width: 100%; background: white; color: var(--purple);
+    border: 1.5px solid var(--purple); padding: 16px; border-radius: 14px;
+    cursor: pointer; font-size: 15px; font-weight: 600; font-family: inherit;
+    transition: all 0.2s; margin-top: 12px;
+  }
+  .repeat-btn:hover { background: var(--purple); color: white; }
+
+  #confetti-canvas {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none; z-index: 1000;
+  }
+
+  @media (max-width: 540px) {
+    .welcome h1 { font-size: 32px; }
+    .question-card { padding: 24px 20px; }
+    .q-title { font-size: 19px; }
+    .rings { grid-template-columns: 1fr; }
+    .track-name { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+<canvas id="confetti-canvas"></canvas>
+<div class="app">
+  <main id="root"></main>
+</div>
+
+<script>
+/* ======================================================================
+   CONFIG · Google Sheets (Apps Script)
+   Pega aquí la URL del Web App de Apps Script para capturar respuestas.
+   ====================================================================== */
+const APPS_SCRIPT_URL = 'TU_URL_AQUI';
+
+/* ======================================================================
+   QUIZ DATA · Ops & Defense Colombia
+   Preguntas elegidas para medir: (a) tipo de usuario, (b) nivel real de
+   uso, (c) profundidad, (d) impacto, (e) multiplicación, (f) barreras.
+   ====================================================================== */
+const QUESTIONS = [
+  {
+    id: 'role',
+    eyebrow: 'Pregunta 1 · Tu perfil',
+    title: '¿Cuál es tu rol en Ops & Defense?',
+    help: 'Esto nos dice qué tipo de usuario eres y personaliza tu resultado. Si tienes un rol híbrido, elige el que mejor te describe.',
+    type: 'radio',
+    options: [
+      { text: 'Analista de Operaciones', sub: 'Procesos operativos, casos, back office' },
+      { text: 'Analista de Fraude / Defense', sub: 'Prevención, detección, investigación de fraude' },
+      { text: 'Ingeniero / Developer', sub: 'Desarrollo, automatización, herramientas internas' },
+      { text: 'Business Analyst / Data', sub: 'Métricas, reportes, análisis de datos' },
+      { text: 'Líder / Manager', sub: 'Gestión de equipo, estrategia, priorización' },
+      { text: 'Otro rol de Ops & Defense', sub: 'Cualquier otro rol del equipo' },
+    ]
+  },
+  {
+    id: 'stack',
+    eyebrow: 'Pregunta 2 · Tu stack',
+    title: '¿Qué herramientas de AI tienes instaladas y configuradas?',
+    help: 'Marca todo lo que ya tienes funcionando (no lo que planeas instalar).',
+    type: 'checkbox',
+    options: [
+      { text: 'Claude', sub: 'Desktop o web, con tu cuenta de Nubank' },
+      { text: 'Cursor', sub: 'Instalado y con acceso al código o proyectos' },
+      { text: 'Glean', sub: 'Para buscar conocimiento interno' },
+      { text: 'Conectores / MCPs', sub: 'Claude o Cursor conectados a otras herramientas' },
+      { text: 'Nada todavía', sub: '', exclusive: true },
+    ],
+    scores: [1, 1, 1, 1, 0]
+  },
+  {
+    id: 'frecuencia',
+    eyebrow: 'Pregunta 3 · Uso real',
+    title: '¿Con qué frecuencia usaste AI en tu trabajo esta semana?',
+    help: 'Piensa en Claude, Cursor, Glean o cualquier otra herramienta de AI.',
+    type: 'radio',
+    options: [
+      { text: 'Nunca o casi nunca', sub: 'No la uso o la uso muy raramente' },
+      { text: 'Una o dos veces', sub: 'La usé para algo puntual esta semana' },
+      { text: 'Varias veces', sub: 'La uso algunos días para tareas específicas' },
+      { text: 'Todos los días', sub: 'Es parte de mi rutina de trabajo diaria' },
+      { text: 'Múltiples veces al día', sub: 'La tengo integrada en casi todo lo que hago' },
+    ],
+    scores: [0, 1, 2, 3, 4]
+  },
+  {
+    id: 'profundidad',
+    eyebrow: 'Pregunta 4 · Cómo la usas',
+    title: 'Cuando usas AI, ¿cómo describes lo que necesitas?',
+    help: 'Elige la opción que mejor describe cómo lo haces hoy, no cómo crees que deberías hacerlo.',
+    type: 'radio',
+    options: [
+      { text: 'Le escribo algo corto y veo qué sale', sub: 'Un par de palabras o una frase' },
+      { text: 'Doy contexto del problema antes de pedir', sub: 'Explico la situación y qué necesito' },
+      { text: 'Defino rol, contexto, formato y restricciones', sub: 'Soy deliberado con lo que pido y cómo lo pido' },
+      { text: 'Tengo prompts guardados y reutilizables', sub: 'Los he probado, refinado y los reutilizo' },
+    ],
+    scores: [0, 1, 3, 4]
+  },
+  {
+    id: 'construido',
+    eyebrow: 'Pregunta 5 · Qué has construido',
+    title: '¿Qué has generado o construido con AI en tu trabajo?',
+    help: 'Marca todo lo que aplique. No importa el tamaño.',
+    type: 'checkbox',
+    options: [
+      { text: 'Documentos, resúmenes o presentaciones', sub: 'SOPs, reportes de casos, comunicaciones' },
+      { text: 'Análisis de datos o dashboards', sub: 'Métricas de operación, tendencias de fraude' },
+      { text: 'Código o scripts', sub: 'Queries, automatizaciones simples, herramientas' },
+      { text: 'Automatizaciones o agentes activos', sub: 'Flujos que corren solos o con mínima intervención' },
+      { text: 'Nada todavía', sub: '', exclusive: true },
+    ],
+    scores: [1, 1, 2, 3, 0]
+  },
+  {
+    id: 'impacto',
+    eyebrow: 'Pregunta 6 · Impacto concreto',
+    title: '¿Puedes nombrar algo concreto que hiciste mejor o más rápido con AI en el último mes?',
+    help: 'No importa el tamaño. Puede ser algo pequeño o algo grande.',
+    type: 'radio',
+    options: [
+      { text: 'No, no lo he notado o medido', sub: '' },
+      { text: 'Sí, ahorré tiempo en tareas repetitivas', sub: 'Cosas que hacía manualmente y ahora van más rápido' },
+      { text: 'Sí, mejoré la calidad de un entregable o decisión', sub: 'El output fue mejor gracias a AI' },
+      { text: 'Sí, resolví algo que sin AI habría tardado mucho más o no hubiera podido', sub: 'Un salto cualitativo real' },
+    ],
+    scores: [0, 1, 2, 4]
+  },
+  {
+    id: 'multiplicar',
+    eyebrow: 'Pregunta 7 · Multiplicar el impacto',
+    title: '¿Has compartido con alguien del equipo algo que aprendiste o construiste con AI?',
+    help: 'Un prompt, un flujo, una forma de usarla, un resultado impactante.',
+    type: 'radio',
+    options: [
+      { text: 'No he compartido nada', sub: '' },
+      { text: 'Sí, informalmente le conté a alguien', sub: 'Una conversación, una demo rápida' },
+      { text: 'Sí, compartí algo concreto que otros usan', sub: 'Un prompt, una herramienta, un flujo' },
+      { text: 'Sí, lideré o propuse una práctica de equipo', sub: 'Algo que adoptó más de una persona' },
+    ],
+    scores: [0, 1, 2, 4]
+  },
+  {
+    id: 'barrera',
+    eyebrow: 'Pregunta 8 · Tu mayor barrera',
+    title: '¿Cuál es tu mayor obstáculo para usar más AI con impacto real?',
+    help: 'Una sola respuesta, la que más resuene con tu situación actual.',
+    type: 'radio',
+    options: [
+      { text: 'No sé por dónde empezar o qué pedirle', sub: 'Me falta claridad sobre cómo usarla en mi trabajo' },
+      { text: 'No encuentro casos de uso claros para mi rol', sub: 'Veo que otros la usan pero no sé cómo aplicarlo a lo mío' },
+      { text: 'Le tengo desconfianza al output que genera', sub: 'No sé cuándo creerle y cuándo no' },
+      { text: 'El contexto de datos / seguridad me limita', sub: 'No sé qué puedo y no puedo hacer con herramientas de AI' },
+      { text: 'No tengo tiempo para aprender', sub: 'La operación del día a día no me deja espacio' },
+      { text: 'Ya la uso bastante, mi barrera es otra', sub: '' },
+    ]
+  },
+  {
+    id: 'emocion',
+    eyebrow: 'Pregunta 9 · Cómo te sientes',
+    title: 'Para cerrar: ¿cómo te sientes con la revolución de AI que estamos viviendo en Nubank?',
+    help: 'No hay respuesta correcta. Esta pregunta es solo para entenderte mejor.',
+    type: 'radio',
+    options: [
+      { text: '🚀 Estoy en el tren y disfrutando el viaje', sub: 'Me siento cómodo/a con el ritmo' },
+      { text: '🏃 Voy corriendo para alcanzarlo', sub: 'Quiero estar ahí pero siento que me falta' },
+      { text: '😮‍💨 Lo veo pasar y no sé por dónde subirme', sub: 'Hay mucho y no sé por dónde empezar' },
+      { text: '😰 Me genera más ansiedad que emoción', sub: 'Siento presión y no sé si voy al ritmo que se espera' },
+      { text: '🤷 No sé muy bien cómo me siento todavía', sub: 'Necesito más contexto para opinar' },
+    ]
+  },
+];
+
+/* Preguntas que puntúan para el score de adopción */
+const SCORED = ['stack', 'frecuencia', 'profundidad', 'construido', 'impacto', 'multiplicar'];
+
+const TRACKS = {
+  1: {
+    name: 'Track 1', label: 'Explorador', cls: 't1', color: '#34C759',
+    desc: 'Estás dando los primeros pasos reales con AI. Hay mucho potencial sin explotar — aquí te decimos exactamente qué hacer primero.',
+    blind: [
+      'AI todavía no es parte de tu rutina: el uso es esporádico o nulo',
+      'Las tareas repetitivas de tu operación las sigues haciendo 100% manual',
+      'Aún no tienes el stack básico (Claude, Glean) funcionando en tu día a día',
+    ],
+    next: [
+      'Instala y configura Claude y Glean esta semana — sin el stack listo, nada de lo demás es posible',
+      'Elige UNA tarea repetitiva de tu semana (resumen de casos, redacción de reportes, búsqueda de procedimientos) y hazla con AI durante 5 días seguidos',
+      'Pídele a Claude que te explique un procedimiento o política interna en lenguaje simple antes de tu próximo caso complejo',
+    ],
+    ohana: [
+      { t: 'Claude 101 · Empezar a usar Claude en tu trabajo', u: 'https://anthropic.skilljar.com/claude-101' },
+      { t: 'AI Fluency: Framework & Foundations', u: 'https://anthropic.skilljar.com/ai-fluency-framework-foundations' },
+    ]
+  },
+  2: {
+    name: 'Track 2', label: 'Practicante', cls: 't2', color: '#2E7CF6',
+    desc: 'Ya usas AI con regularidad. Es momento de pasar de usuario a creador de flujos reproducibles que impacten al equipo, no solo a ti.',
+    blind: [
+      'El uso sigue siendo reactivo: cuando estás atascado, no como práctica sistemática',
+      'No tienes prompts reutilizables para tus tareas más frecuentes de operación o defensa',
+      'Lo que aprendes se queda contigo: todavía no multiplicas en el equipo',
+    ],
+    next: [
+      'Construye un prompt template para tus 3 tareas más recurrentes (análisis de casos, reportes de turno, revisión de alertas) y refínalo durante una semana',
+      'Comparte uno de esos templates con al menos otra persona del equipo y mide si le sirve',
+      'Identifica un proceso de tu operación que se pueda semi-automatizar con AI y propón un piloto',
+    ],
+    ohana: [
+      { t: 'AI Fluency: Framework & Foundations', u: 'https://anthropic.skilljar.com/ai-fluency-framework-foundations' },
+      { t: 'Introduction to MCP · Conecta Claude con tus herramientas', u: 'https://anthropic.skilljar.com/introduction-to-model-context-protocol' },
+    ]
+  },
+  3: {
+    name: 'Track 3', label: 'Multiplicador', cls: 't3', color: '#820AD1',
+    desc: 'Eres referente de AI en Ops & Defense. Tu reto ahora es diseñar cómo el equipo entero sube de nivel contigo.',
+    blind: [
+      'Puede que tus flujos funcionen para ti pero no estén documentados para que otros los adopten',
+      'El conocimiento que generas aún no se convierte en estándares de equipo',
+      'Quizá no estás usando AI para decisiones de alto impacto (priorización, estrategia de detección, diseño de procesos)',
+    ],
+    next: [
+      'Documenta uno de tus flujos de AI como un runbook que cualquier persona del equipo pueda seguir sin ayuda',
+      'Propón un espacio recurrente (15 min semanales) donde el equipo comparte qué funcionó y qué no con AI',
+      'Lleva AI a una decisión de alto nivel: dale contexto de la operación a Claude y pídele que desafíe tu enfoque actual',
+    ],
+    ohana: [
+      { t: 'MCP: Advanced Topics', u: 'https://anthropic.skilljar.com/model-context-protocol-advanced-topics' },
+      { t: 'Introduction to Agent Skills', u: 'https://anthropic.skilljar.com/introduction-to-agent-skills' },
+      { t: 'Building with the Claude API', u: 'https://anthropic.skilljar.com/claude-with-the-anthropic-api' },
+    ]
+  }
+};
+
+const EMOCION_MSGS = [
+  { match: 'tren', msg: 'Eso se nota y es valioso. Tu energía con AI es exactamente lo que el equipo necesita. El siguiente paso es canalizarla para que otros también suban al tren contigo.' },
+  { match: 'corriendo', msg: 'Esa sensación de querer estar ahí es el mejor punto de partida. No estás atrasado/a — estás en movimiento. Con los recursos correctos y un poco de foco, la brecha se cierra rápido.' },
+  { match: 'pasar', msg: 'Completamente válido. Hay mucho ruido alrededor de AI y es normal sentirse perdido/a. El programa Ohana existe exactamente para esto: darte un punto de entrada claro, sin abrumarte.' },
+  { match: 'ansiedad', msg: 'Gracias por la honestidad — eso toma valor. La presión que sientes es real, y no estás solo/a. Adoptar AI no es una competencia: es un proceso, y cada persona tiene su ritmo. Ohana está aquí para acompañarte, no para calificarte.' },
+  { match: 'todavía', msg: 'Eso también es una respuesta válida. No tienes que tener una opinión formada sobre algo que todavía está tomando forma. Lo que sí puedes hacer es empezar a experimentar sin presión y ver cómo te va.' },
+];
+
+/* ======================================================================
+   STATE
+   ====================================================================== */
+let currentQ = 0;
+let screen = 'welcome';
+const answers = {};
+
+/* ======================================================================
+   SCORING
+   ====================================================================== */
+function questionScore(q) {
+  const sel = answers[q.id] || [];
+  if (!q.scores || sel.length === 0) return 0;
+  if (q.type === 'radio') return q.scores[sel[0]] || 0;
+  return sel.reduce((s, i) => s + (q.scores[i] || 0), 0);
+}
+function questionMax(q) {
+  if (!q.scores) return 0;
+  if (q.type === 'radio') return Math.max(...q.scores);
+  return q.scores.reduce((s, v) => s + v, 0);
+}
+function computeAdoption() {
+  let total = 0, max = 0;
+  SCORED.forEach(id => {
+    const q = QUESTIONS.find(x => x.id === id);
+    total += questionScore(q);
+    max += questionMax(q);
+  });
+  return Math.round((total / max) * 100);
+}
+function computeHabitos() {
+  const freq = QUESTIONS.find(q => q.id === 'frecuencia');
+  const mult = QUESTIONS.find(q => q.id === 'multiplicar');
+  const t = questionScore(freq) + questionScore(mult);
+  const m = questionMax(freq) + questionMax(mult);
+  return Math.round((t / m) * 100);
+}
+function getTrack(score) {
+  if (score <= 40) return TRACKS[1];
+  if (score <= 70) return TRACKS[2];
+  return TRACKS[3];
+}
+function answerText(qId) {
+  const q = QUESTIONS.find(x => x.id === qId);
+  const sel = answers[qId] || [];
+  return sel.map(i => q.options[i].text).join(' | ');
+}
+
+/* ======================================================================
+   SHEETS
+   ====================================================================== */
+function sendToSheets(payload) {
+  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === 'TU_URL_AQUI') return;
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(() => {});
+}
+
+/* ======================================================================
+   RENDER
+   ====================================================================== */
+const root = document.getElementById('root');
+
+function render() {
+  if (screen === 'welcome') renderWelcome();
+  else if (screen === 'quiz') renderQuiz();
+  else renderResults();
+  window.scrollTo(0, 0);
+}
+
+function renderWelcome() {
+  root.innerHTML = `
+    <section class="welcome stage">
+      <div class="logo-wrap"><div class="logo-badge">🛡️</div></div>
+      <p class="eyebrow">Ohana Program · Ops & Defense Colombia</p>
+      <h1>¿Cuál es tu <span class="accent">track</span> de AI?</h1>
+      <p class="subtitle">Este diagnóstico mide tu nivel real de uso de AI y qué tipo de usuario eres, para decirte exactamente qué te falta para sacarle más provecho en tu trabajo.</p>
+      <div class="pills">
+        <span class="pill t1">Track 1 · Explorador</span>
+        <span class="pill t2">Track 2 · Practicante</span>
+        <span class="pill t3">Track 3 · Multiplicador</span>
+      </div>
+      <div class="meta"><span>~3 min</span><span class="dot"></span><span>9 preguntas</span><span class="dot"></span><span>100% anónimo</span></div>
+      <div class="honesty">
+        <strong>Antes de empezar:</strong> no hay respuestas correctas ni incorrectas. Este diagnóstico solo es útil si respondes con honestidad sobre dónde estás hoy — no donde quisieras estar. Entre más preciso seas, más útil será la recomendación que recibas.
+      </div>
+      <button class="start-btn" onclick="startQuiz()">Empezar diagnóstico →</button>
+    </section>
+  `;
+}
+
+function renderQuiz() {
+  const q = QUESTIONS[currentQ];
+  const total = QUESTIONS.length;
+  const sel = answers[q.id] || [];
+  const pct = Math.round((currentQ / total) * 100);
+
+  const optionsHtml = q.options.map((o, i) => `
+    <button class="option ${q.type} ${sel.includes(i) ? 'selected' : ''}" onclick="selectOption(${i})">
+      <span class="check"></span>
+      <span class="opt-text">${o.text}${o.sub ? `<span class="opt-sub">${o.sub}</span>` : ''}</span>
+    </button>
+  `).join('');
+
+  const isLast = currentQ === total - 1;
+  root.innerHTML = `
+    <section class="stage">
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+        <p class="progress-label">Pregunta ${currentQ + 1} de ${total}</p>
+      </div>
+      <div class="question-card">
+        <div class="q-eyebrow">${q.eyebrow}</div>
+        <h2 class="q-title">${q.title}</h2>
+        <p class="q-help">${q.help}</p>
+        <div class="options">${optionsHtml}</div>
+      </div>
+      <div class="nav">
+        <button class="back-btn" onclick="goBack()" ${currentQ === 0 ? 'disabled' : ''}>← Atrás</button>
+        <button class="next-btn" onclick="goNext()" ${sel.length === 0 ? 'disabled' : ''}>${isLast ? 'Ver mi track →' : 'Siguiente →'}</button>
+      </div>
+    </section>
+  `;
+}
+
+function renderResults() {
+  const score = computeAdoption();
+  const habitos = computeHabitos();
+  const track = getTrack(score);
+  const role = answerText('role') || 'Ops & Defense';
+  const barrera = answerText('barrera');
+  const emocion = answerText('emocion');
+
+  sendToSheets({
+    equipo: 'Ops & Defense Colombia',
+    rol: role,
+    stack: answerText('stack'),
+    frecuencia: answerText('frecuencia'),
+    profundidad: answerText('profundidad'),
+    construido: answerText('construido'),
+    impacto: answerText('impacto'),
+    multiplicar: answerText('multiplicar'),
+    barrera: barrera,
+    emocion: emocion,
+    score: score,
+    habitos: habitos,
+    track: track.name
+  });
+
+  const emocionCfg = EMOCION_MSGS.find(m => emocion.toLowerCase().includes(m.match)) || EMOCION_MSGS[4];
+  const emoji = emocion.split(' ')[0];
+  const emocionLabel = emocion.split(' ').slice(1).join(' ');
+
+  root.innerHTML = `
+    <section class="results">
+      <div class="result-hero">
+        <span class="role-badge">${role}</span>
+      </div>
+
+      <div class="track-card ${track.cls}">
+        <div class="track-label">Tu resultado</div>
+        <div class="track-name">${track.name} · ${track.label}</div>
+        <p class="track-desc">${track.desc}</p>
+      </div>
+
+      <div class="rings">
+        <div class="ring-card">
+          <svg class="ring-svg" viewBox="0 0 70 70">
+            <circle class="ring-track" cx="35" cy="35" r="30"></circle>
+            <circle class="ring-fill" id="ring-adopt" cx="35" cy="35" r="30"></circle>
+          </svg>
+          <div class="ring-label">Adopción de AI</div>
+          <div class="ring-value" id="adopt-value">0%</div>
+          <div class="ring-sub">Stack, uso, profundidad e impacto</div>
+        </div>
+        <div class="ring-card">
+          <svg class="ring-svg" viewBox="0 0 70 70">
+            <circle class="ring-track" cx="35" cy="35" r="30"></circle>
+            <circle class="ring-fill env" id="ring-hab" cx="35" cy="35" r="30"></circle>
+          </svg>
+          <div class="ring-label">Hábitos & multiplicación</div>
+          <div class="ring-value" id="hab-value">0%</div>
+          <div class="ring-sub">Frecuencia y trabajo en equipo</div>
+        </div>
+      </div>
+
+      <div class="rec-section">
+        <p class="rec-title" style="color:var(--amber)">🚧 Tu punto ciego</p>
+        ${track.blind.map(b => `<div class="rec-item"><span class="rec-dot" style="background:var(--amber)"></span>${b}</div>`).join('')}
+      </div>
+
+      <div class="rec-section">
+        <p class="rec-title" style="color:${track.color}">🎯 Tu próximo paso concreto</p>
+        ${track.next.map(n => `<div class="rec-item"><span class="rec-dot" style="background:${track.color}"></span>${n}</div>`).join('')}
+      </div>
+
+      <div class="rec-section">
+        <p class="rec-title" style="color:var(--muted)">🔗 En Ohana te recomendamos</p>
+        ${track.ohana.map(o => `<a href="${o.u}" target="_blank" rel="noopener" class="ohana-link">${o.t} ↗</a>`).join('')}
+      </div>
+
+      <div class="rec-section">
+        <p class="rec-title" style="color:var(--muted)">💜 Cómo te sientes</p>
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <span style="font-size:1.5rem;flex-shrink:0">${emoji}</span>
+          <div>
+            <p style="font-size:14px;font-weight:600;margin-bottom:6px">${emocionLabel}</p>
+            <p style="font-size:13px;line-height:1.6;color:var(--muted)">${emocionCfg.msg}</p>
+          </div>
+        </div>
+      </div>
+
+      ${barrera && barrera !== 'Ya la uso bastante, mi barrera es otra' ? `
+      <div class="rec-section">
+        <p class="rec-title" style="color:var(--muted)">💬 Sobre tu barrera actual</p>
+        <div class="rec-item"><span class="rec-dot" style="background:var(--purple)"></span>Mencionaste: <em>&ldquo;${barrera}&rdquo;</em> — esto es exactamente lo que el programa Ohana está diseñado para resolver. Úsalo.</div>
+      </div>` : ''}
+
+      <button class="repeat-btn" onclick="restart()">↺ Repetir diagnóstico</button>
+    </section>
+  `;
+
+  setTimeout(() => animateRing('ring-adopt', score, 'adopt-value'), 200);
+  setTimeout(() => animateRing('ring-hab', habitos, 'hab-value'), 400);
+  let pieces = 30;
+  if (score >= 70) pieces = 90;
+  else if (score >= 40) pieces = 55;
+  setTimeout(() => fireConfetti(pieces), 350);
+}
+
+/* ======================================================================
+   INTERACTIONS
+   ====================================================================== */
+function startQuiz() { screen = 'quiz'; currentQ = 0; render(); }
+
+function selectOption(idx) {
+  const q = QUESTIONS[currentQ];
+  const sel = answers[q.id] || [];
+  if (q.type === 'radio') {
+    answers[q.id] = [idx];
+  } else {
+    const opt = q.options[idx];
+    if (opt.exclusive) {
+      answers[q.id] = sel.includes(idx) ? [] : [idx];
+    } else {
+      let next = sel.filter(i => !q.options[i].exclusive);
+      if (next.includes(idx)) next = next.filter(i => i !== idx);
+      else next.push(idx);
+      answers[q.id] = next;
+    }
+  }
+  render();
+}
+
+function goNext() {
+  if ((answers[QUESTIONS[currentQ].id] || []).length === 0) return;
+  if (currentQ < QUESTIONS.length - 1) { currentQ++; render(); }
+  else { screen = 'results'; render(); }
+}
+function goBack() {
+  if (currentQ > 0) { currentQ--; render(); }
+}
+function restart() {
+  Object.keys(answers).forEach(k => delete answers[k]);
+  currentQ = 0;
+  screen = 'welcome';
+  render();
+}
+
+/* ======================================================================
+   FX
+   ====================================================================== */
+function animateRing(circleId, pct, valueId) {
+  const C = 188;
+  const ring = document.getElementById(circleId);
+  if (ring) ring.style.strokeDashoffset = C - (C * pct) / 100;
+  const valEl = document.getElementById(valueId);
+  if (!valEl) return;
+  const start = performance.now();
+  const dur = 1500;
+  function tick(now) {
+    const t = Math.min(1, (now - start) / dur);
+    const eased = 1 - Math.pow(1 - t, 3);
+    valEl.textContent = `${Math.round(eased * pct)}%`;
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function fireConfetti(count) {
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = window.innerWidth * dpr;
+  canvas.height = window.innerHeight * dpr;
+  canvas.style.width = window.innerWidth + 'px';
+  canvas.style.height = window.innerHeight + 'px';
+  ctx.scale(dpr, dpr);
+  const COLORS = ['#820AD1', '#B061E5', '#34C759', '#2E7CF6', '#FFD86B', '#FF6B9D'];
+  const pieces = [];
+  for (let i = 0; i < count; i++) {
+    pieces.push({
+      x: window.innerWidth / 2 + (Math.random() - 0.5) * 200,
+      y: window.innerHeight / 3,
+      vx: (Math.random() - 0.5) * 8,
+      vy: -Math.random() * 14 - 4,
+      g: 0.35 + Math.random() * 0.15,
+      size: 6 + Math.random() * 8,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      rot: Math.random() * Math.PI * 2,
+      vr: (Math.random() - 0.5) * 0.3,
+      shape: Math.random() > 0.5 ? 'rect' : 'circle',
+      life: 1
+    });
+  }
+  function frame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    for (const p of pieces) {
+      p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= 0.005;
+      if (p.y < window.innerHeight + 40 && p.life > 0) alive = true;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.globalAlpha = Math.max(0, p.life);
+      ctx.fillStyle = p.color;
+      if (p.shape === 'rect') ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+      else { ctx.beginPath(); ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2); ctx.fill(); }
+      ctx.restore();
+    }
+    if (alive) requestAnimationFrame(frame);
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  frame();
+}
+
+render();
+</script>
+</body>
+</html>
