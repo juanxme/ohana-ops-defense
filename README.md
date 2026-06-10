@@ -42,6 +42,14 @@ Apps Script example:
 ```javascript
 function doPost(e) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  if (sheet.getRange(1, 1).isBlank()) {
+    sheet.appendRow([
+      'Date', 'Email', 'Role', 'AI Stack', 'Usage Frequency', 'Prompting Depth',
+      'Built with AI', 'Impact', 'Sharing', 'Main Barrier', 'Sentiment',
+      'Adoption Score', 'Habits Score', 'Track'
+    ]);
+    sheet.getRange(1, 1, 1, 14).setFontWeight('bold');
+  }
   const d = JSON.parse(e.postData.contents);
   sheet.appendRow([
     d.fecha, d.correo, d.rol, d.stack, d.frecuencia, d.profundidad,
